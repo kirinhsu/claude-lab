@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關於我</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #eef0ff;
+      --blob-1: #8b7cff;
+      --blob-2: #ff8fd1;
+      --blob-3: #5ee7df;
+      --blob-4: #ffc778;
+
+      --card-bg: rgba(255, 255, 255, 0.78);
+      --card-border: rgba(255, 255, 255, 0.9);
+      --card-shadow: 0 1px 2px rgba(30, 20, 70, 0.06), 0 30px 80px -20px rgba(60, 40, 140, 0.35);
+
+      --text: #1c1a2e;
+      --text-muted: #5f5b78;
+      --text-soft: #9a96b3;
+      --line: rgba(28, 26, 46, 0.09);
+
+      --accent: #6d5dfc;
+      --accent-2: #e45bc0;
+      --gradient: linear-gradient(120deg, var(--accent), var(--accent-2));
+
+      --chip-bg: #ffffff;
+      --chip-border: rgba(109, 93, 252, 0.18);
+      --chip-text: #3b2f9e;
+
+      --quote-bg: rgba(109, 93, 252, 0.07);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-base: #0d0b1f;
+        --blob-1: #5b43ff;
+        --blob-2: #c2328f;
+        --blob-3: #1aa9a0;
+        --blob-4: #b8652a;
+
+        --card-bg: rgba(24, 21, 48, 0.72);
+        --card-border: rgba(255, 255, 255, 0.08);
+        --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+
+        --text: #f2f0ff;
+        --text-muted: #b6b1d6;
+        --text-soft: #7d78a0;
+        --line: rgba(255, 255, 255, 0.08);
+
+        --accent: #9b8cff;
+        --accent-2: #ff7ad1;
+
+        --chip-bg: rgba(255, 255, 255, 0.05);
+        --chip-border: rgba(155, 140, 255, 0.25);
+        --chip-text: #ddd6ff;
+
+        --quote-bg: rgba(155, 140, 255, 0.1);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+      overflow-x: hidden;
+      font-family: "Inter", "Noto Sans TC", system-ui, sans-serif;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      background-color: var(--bg-base);
+      background-image:
+        radial-gradient(at 12% 18%, var(--blob-1) 0px, transparent 50%),
+        radial-gradient(at 88% 12%, var(--blob-2) 0px, transparent 50%),
+        radial-gradient(at 80% 88%, var(--blob-3) 0px, transparent 50%),
+        radial-gradient(at 10% 92%, var(--blob-4) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* 漂浮的柔光色塊，增加背景層次 */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: 0;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.55;
+      pointer-events: none;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      top: -120px;
+      left: -100px;
+      background: var(--blob-1);
+    }
+
+    body::after {
+      right: -120px;
+      bottom: -140px;
+      background: var(--blob-2);
+      animation-delay: -9s;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(80px, 60px) scale(1.15); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      padding: 56px 40px 36px;
+      text-align: center;
+      background: var(--card-bg);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      box-shadow: var(--card-shadow);
+      animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(28px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* 頭像：漸層外環 + 內層純色 */
+    .avatar {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      margin: 0 auto 24px;
+      display: grid;
+      place-items: center;
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      color: #fff;
+      border-radius: 50%;
+      background: var(--gradient);
+      box-shadow:
+        0 0 0 5px var(--card-bg),
+        0 0 0 7px rgba(109, 93, 252, 0.35),
+        0 18px 36px -10px rgba(109, 93, 252, 0.6);
+    }
+
+    h1 {
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: 2.25rem;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* 區塊標題：兩側細線 */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 40px 0 18px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: var(--text-soft);
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 9px 16px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--chip-text);
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-border);
+      border-radius: 14px;
+      box-shadow: 0 2px 6px -2px rgba(60, 40, 140, 0.12);
+      cursor: default;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  box-shadow 0.25s, border-color 0.25s;
+    }
+
+    .tag:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 20px -8px rgba(109, 93, 252, 0.45);
+    }
+
+    /* 一句話：左側漸層色條 */
+    blockquote {
+      position: relative;
+      margin-top: 40px;
+      padding: 22px 24px 22px 28px;
+      font-size: 1.08rem;
+      font-weight: 500;
+      line-height: 1.8;
+      text-align: left;
+      color: var(--text);
+      background: var(--quote-bg);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    blockquote::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background: var(--gradient);
+    }
+
+    footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      color: var(--text-soft);
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 44px 22px 28px; border-radius: 26px; }
+      h1 { font-size: 1.9rem; }
+      blockquote { font-size: 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before, body::after, .card { animation: none; }
+      .tag { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <!-- 把「小」換成你名字的第一個字 -->
+    <div class="avatar">小</div>
+
+    <!-- 你的名字 -->
+    <h1>小明</h1>
+    <p class="subtitle">喜歡探索新事物的普通人</p>
+
+    <p class="section-title">我的興趣</p>
+    <div class="tags">
+      <span class="tag">📚 閱讀</span>
+      <span class="tag">🎵 音樂</span>
+      <span class="tag">✈️ 旅行</span>
+      <span class="tag">💻 程式設計</span>
+      <span class="tag">📷 攝影</span>
+    </div>
+
+    <!-- 你的一句話 -->
+    <blockquote>保持好奇，持續學習，每天都比昨天更好一點。</blockquote>
+
+    <footer>謝謝你來認識我 ✨</footer>
+  </main>
+</body>
+</html>
